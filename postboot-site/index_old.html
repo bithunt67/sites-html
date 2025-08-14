@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostBoot - Vincular Conta</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">PostBoot</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" 
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Usuários</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Redes Sociais</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Conteúdos</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Conteúdo principal -->
+    <div class="container d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg p-4" style="width: 100%; max-width: 400px;">
+            <h2 class="text-center mb-4">Vincular Conta</h2>
+            <div class="mb-3">
+                <label for="username" class="form-label">Nome do Usuário</label>
+                <input type="text" id="username" class="form-control" placeholder="Digite seu nome...">
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" onclick="connect('Instagram')">Conectar ao Instagram</button>
+                <button class="btn btn-info text-white" onclick="connect('TikTok')">Conectar ao TikTok</button>
+                <button class="btn btn-dark" onclick="connect('X')">Conectar ao X</button>
+                <button class="btn btn-danger" onclick="connect('YouTube')">Conectar ao YouTube</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function connect(platform) {
+            const username = document.getElementById('username').value;
+            if (!username.trim()) {
+                alert('Por favor, insira seu nome de usuário antes de conectar.');
+                return;
+            }
+            if (platform === 'Instagram') {
+                const instaUrl = `https://www.instagram.com/oauth/authorize?enable_fb_login=0&force_authentication=1&client_id=1326353425175347&redirect_uri=https://n8n.witicket.com.br/webhook/c7fc72f9-db74-48f1-88fd-85082045d023&response_type=code&scope=instagram_business_basic%2Cinstagram_business_manage_messages%2Cinstagram_business_manage_comments%2Cinstagram_business_content_publish%2Cinstagram_business_manage_insights`;
+                window.location.href = instaUrl;
+            } else if (platform === 'TikTok') {
+                const tiktokUrl = `https://www.tiktok.com/v2/auth/authorize/?scope=user.info.basic,video.list,video.publish,video.upload&redirect_uri=https://n8n.witicket.com.br/webhook/d8e26afa-a58b-4ad3-a8b5-849c753b109a&state=csrfState&response_type=code&client_key=sbawehj1o167o9ys86&client_id=ramon123&user_id=${encodeURIComponent(username)}`;
+                window.location.href = tiktokUrl;
+            } else {
+                alert(`Tentando conectar ${username} com ${platform}`);
+            }
+        }
+    </script>
+    <!-- Incluindo o JavaScript do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

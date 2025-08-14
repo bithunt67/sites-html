@@ -1,0 +1,158 @@
+body {
+    padding-top: 60px; /* Espaço para a navbar fixa */
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); /* Gradiente suave */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte mais moderna */
+}
+
+.card {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1); /* Sombra mais suave e profunda */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animação ao passar o mouse */
+}
+
+.card:hover {
+    transform: translateY(-5px); /* Leve elevação */
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15); /* Sombra mais intensa */
+}
+
+.form-control {
+    border-radius: 10px;
+    border: 2px solid #e9ecef; /* Borda sutil */
+    transition: border-color 0.3s ease; /* Transição suave */
+}
+
+.form-control:focus {
+    border-color: #007bff; /* Cor primária do Bootstrap */
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3); /* Sombra ao focar */
+}
+
+.btn {
+    border-radius: 10px;
+    padding: 12px 20px; /* Botões mais confortáveis */
+    font-weight: 600; /* Texto mais destacado */
+    transition: transform 0.2s ease, box-shadow 0.2s ease; /* Animação suave */
+}
+
+.btn:hover {
+    transform: translateY(-2px); /* Elevação leve */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra ao passar o mouse */
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #007bff, #00c4ff); /* Gradiente no botão */
+}
+
+.btn-info {
+    background: linear-gradient(45deg, #17a2b8, #3bd1e6); /* Gradiente TikTok */
+}
+
+.btn-dark {
+    background: linear-gradient(45deg, #212529, #495057); /* Gradiente X */
+}
+
+.btn-danger {
+    background: linear-gradient(45deg, #dc3545, #ff5767); /* Gradiente YouTube */
+}
+
+.text-primary {
+    color: #007bff !important; /* Cor consistente com Bootstrap */
+}
+
+h1, h2 {
+    letter-spacing: 1px; /* Espaçamento leve para elegância */
+}
+
+/* Language Toggle Switch */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px; /* Width of the toggle */
+    height: 34px; /* Height of the toggle */
+    margin-left: 15px; /* Space from other navbar items */
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Background when off */
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 34px; /* Rounded corners */
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white; /* Circle color */
+    -webkit-transition: .4s;
+    transition: .4s;
+    border-radius: 50%; /* Make it a circle */
+}
+
+input:checked + .slider {
+    background-color: #007bff; /* Background when on (primary color) */
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #007bff;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Language labels on the toggle */
+.lang-label {
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    line-height: 34px; /* Center vertically */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.lang-pt {
+    left: 8px;
+    color: #333; /* Color when PT is not active */
+}
+
+.lang-en {
+    right: 8px;
+    color: #333; /* Color when EN is not active */
+}
+
+input:checked ~ .lang-pt {
+    color: #ccc; /* PT label color when EN is active */
+}
+
+input:checked ~ .lang-en {
+    color: white; /* EN label color when EN is active */
+}
+
+input:not(:checked) ~ .lang-pt {
+    color: white; /* PT label color when PT is active */
+}
+
+input:not(:checked) ~ .lang-en {
+    color: #ccc; /* EN label color when PT is active */
+}

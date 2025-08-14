@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostBoot - Usuários</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            padding-top: 60px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .card {
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .form-control {
+            border-radius: 10px;
+            border: 2px solid #e9ecef;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+        }
+
+        .btn {
+            border-radius: 10px;
+            padding: 12px 20px;
+            font-weight: 600;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #007bff, #00c4ff);
+        }
+
+        .text-primary {
+            color: #007bff !important;
+        }
+
+        h1, h2 {
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <div id="navbar-placeholder"></div>
+    <div class="container mt-5 d-flex justify-content-center align-items-center min-vh-100">
+        <div class="card shadow-lg p-4 rounded-3 border-0" style="width: 100%; max-width: 500px;">
+            <h1 class="text-center mb-4 fw-bold text-primary">Usuários</h1>
+            <h2 class="text-center mb-4 text-muted fs-4">Cadastrar Novo Usuário</h2>
+            <form id="userForm" onsubmit="submitUser(event)">
+                <!-- ID -->
+                <div class="mb-3">
+                    <label for="id" class="form-label fw-semibold">ID</label>
+                    <input type="text" id="id" name="id" class="form-control form-control-lg shadow-sm" placeholder="Digite o ID..." required>
+                </div>
+                <!-- Nome -->
+                <div class="mb-3">
+                    <label for="nome" class="form-label fw-semibold">Nome</label>
+                    <input type="text" id="nome" name="nome" class="form-control form-control-lg shadow-sm" placeholder="Digite o nome..." required>
+                </div>
+                <!-- Email -->
+                <div class="mb-3">
+                    <label for="email" class="form-label fw-semibold">Email</label>
+                    <input type="email" id="email" name="email" class="form-control form-control-lg shadow-sm" placeholder="Digite o email..." required>
+                </div>
+                <!-- Senha -->
+                <div class="mb-3">
+                    <label for="senha" class="form-label fw-semibold">Senha</label>
+                    <input type="password" id="senha" name="senha" class="form-control form-control-lg shadow-sm" placeholder="Digite a senha..." required>
+                </div>
+                <!-- Display Names das Redes -->
+                <div class="mb-3">
+                    <label for="display_name_instagram" class="form-label fw-semibold">Instagram</label>
+                    <input type="text" id="display_name_instagram" name="display_name_instagram" class="form-control shadow-sm" placeholder="Nome de exibição no Instagram">
+                </div>
+                <div class="mb-3">
+                    <label for="display_name_tiktok" class="form-label fw-semibold">TikTok</label>
+                    <input type="text" id="display_name_tiktok" name="display_name_tiktok" class="form-control shadow-sm" placeholder="Nome de exibição no TikTok">
+                </div>
+                <div class="mb-3">
+                    <label for="display_name_x" class="form-label fw-semibold">X</label>
+                    <input type="text" id="display_name_x" name="display_name_x" class="form-control shadow-sm" placeholder="Nome de exibição no X">
+                </div>
+                <div class="mb-4">
+                    <label for="display_name_face" class="form-label fw-semibold">Facebook</label>
+                    <input type="text" id="display_name_face" name="display_name_face" class="form-control shadow-sm" placeholder="Nome de exibição no Facebook">
+                </div>
+                <!-- Botão de Enviar -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary btn-lg shadow-sm d-flex align-items-center justify-content-center">
+                        <i class="fas fa-user-plus me-2"></i> Cadastrar Usuário
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+    <script>
+        fetch('components/navbar.html')
+            .then(response => response.text())
+            .then(data => document.getElementById('navbar-placeholder').innerHTML = data);
+
+        function submitUser(event) {
+            event.preventDefault(); // Evita o envio padrão do formulário
+            const form = document.getElementById('userForm');
+            const formData = new FormData(form);
+            const userData = Object.fromEntries(formData.entries());
+
+            fetch('https://n8n.witicket.com.br/webhook-test/482260d7-4ea4-40d6-b8db-4e98e01ea7f4', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert('Usuário cadastrado com sucesso!');
+                    form.reset(); // Limpa o formulário
+                } else {
+                    alert('Erro ao cadastrar usuário. Tente novamente.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao conectar ao servidor.');
+            });
+        }
+    </script>
+</body>
+</html>
