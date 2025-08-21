@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-i18n-key]').forEach(element => {
             const key = element.getAttribute('data-i18n-key');
             if (translations[key]) {
-                element.textContent = translations[key];
+                element.innerHTML = translations[key];
             }
         });
     }

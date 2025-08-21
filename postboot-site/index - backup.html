@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PostBoot - Agende suas Redes Sociais</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            background: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: #007bff !important;
+        }
+
+        .section {
+            padding: 60px 0;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            background: #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #007bff, #00c4ff);
+            border: none;
+            padding: 12px 25px;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            background: linear-gradient(45deg, #0056b3, #009cff);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: #007bff;
+            margin-bottom: 15px;
+        }
+
+        .footer {
+            background: #fff;
+            padding: 20px 0;
+            box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1,
+        h2 {
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            color: #007bff;
+        }
+
+        .lead {
+            font-size: 1.2rem;
+            font-weight: 300;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .pricing-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .price {
+            min-height: 80px;
+        }
+
+        .btn-group .btn {
+            padding: 10px 20px;
+            font-weight: 500;
+        }
+
+        .btn-check:checked+.btn-outline-primary {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .badge {
+            font-size: 0.8rem;
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+            margin-bottom: 20px;
+        }
+
+        .pricing-card ul li {
+            margin-bottom: 10px;
+        }
+
+        .pricing-card ul li:before {
+            content: "✔";
+            color: #007bff;
+            margin-right: 10px;
+        }
+
+        .why-us-icon {
+            font-size: 3rem;
+            color: #007bff;
+            margin-bottom: 20px;
+        }
+
+        .highlight-text {
+            color: #007bff;
+            font-weight: 600;
+        }
+
+        /* Estilos para Política de Privacidade e Termos de Uso */
+        .legal-section .card {
+            padding: 40px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .legal-section h3 {
+            color: #007bff;
+            font-size: 1.5rem;
+            margin-top: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .legal-section h3 i {
+            margin-right: 10px;
+            color: #007bff;
+        }
+
+        .legal-section p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .legal-nav {
+            position: sticky;
+            top: 100px;
+            padding: 20px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .legal-nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .legal-nav ul li {
+            margin-bottom: 15px;
+        }
+
+        .legal-nav ul li a {
+            color: #007bff;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .legal-nav ul li a:hover {
+            color: #0056b3;
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: #007bff;
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            background: #0056b3;
+            color: white;
+        }
+
+        /* Estilos para a seção Criadores */
+        .creators-section {
+            background: #fff;
+            padding: 60px 0;
+        }
+
+        .creator-card {
+            text-align: center;
+            padding: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .creator-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .creator-avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #007bff;
+        }
+
+        .creator-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .creator-title {
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .social-icons a {
+            font-size: 1.5rem;
+            color: #007bff;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">PostBoot</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#features" data-i18n-key="nav_features">Funcionalidades</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#tutorial" data-i18n-key="nav_tutorial">Tutorial</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pricing" data-i18n-key="nav_pricing">Preços</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#why-us" data-i18n-key="nav_why_us">Por Que Nós</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contato" data-i18n-key="nav_contact">Contato</a></li>
+                    <li class="nav-item"><a class="nav-link" href="politica-de-privacidade.html" target="_blank" data-i18n-key="nav_privacy_policy">Política de Privacidade</a></li>
+                    <li class="nav-item"><a class="nav-link" href="termos-de-uso.html" target="_blank" data-i18n-key="nav_terms_of_use">Termos de Uso</a></li>
+                    <li class="nav-item"><a class="nav-link btn btn-primary text-white ms-2" href="https://app.postboot.raseta.com.br/" data-i18n-key="nav_get_started">Começar Agora</a></li>
+                </ul>
+                <div id="language-selector" class="ms-3"></div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="section text-center" style="padding-top: 120px;">
+        <div class="container">
+            <h1 class="display-4 mb-3" data-i18n-key="hero_title">Bem-vindo ao PostBoot</h1>
+            <p class="lead mb-4" data-i18n-key="hero_subtitle">Agende suas publicações em todas as redes sociais com apenas alguns cliques!</p>
+            <a href="#tutorial" class="btn btn-primary" data-i18n-key="hero_button">Saiba Como</a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-i18n-key="features_title">Funcionalidades</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card p-4 text-center h-100">
+                        <i class="fas fa-calendar-alt feature-icon"></i>
+                        <h3 class="fs-5 fw-semibold" data-i18n-key="features_item1_title">Agendamento Simples</h3>
+                        <p data-i18n-key="features_item1_desc">Programe posts para Instagram, TikTok, X, YouTube e Facebook em um só lugar.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4 text-center h-100">
+                        <i class="fas fa-users feature-icon"></i>
+                        <h3 class="fs-5 fw-semibold" data-i18n-key="features_item2_title">Gerencie Usuários</h3>
+                        <p data-i18n-key="features_item2_desc">Cadastre e vincule múltiplos perfis de redes sociais com facilidade.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card p-4 text-center h-100">
+                        <i class="fas fa-upload feature-icon"></i>
+                        <h3 class="fs-5 fw-semibold" data-i18n-key="features_item3_title">Upload de Conteúdo</h3>
+                        <p data-i18n-key="features_item3_desc">Envie fotos e vídeos com descrições e URLs personalizadas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorial Section -->
+    <section id="tutorial" class="section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-i18n-key="tutorial_title">Como Utilizar o PostBoot</h2>
+            <div class="row g-4">
+                <div class="col-md-4 text-center">
+                    <div class="card p-4 h-100">
+                        <i class="fas fa-user-plus feature-icon"></i>
+                        <h3 class="fs-5 fw-semibold" data-i18n-key="tutorial_step1_title">1. Cadastre-se</h3>
+                        <p data-i18n-key="tutorial_step1_desc">Crie um usuário com nome, email, senha e nomes de exibição para suas redes.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="card p-4 h-100">
+                        <i class="fas fa-link feature-icon"></i>
+                        <h3 class="fs-5 fw-semibold" data-i18n-key="tutorial_step2_title">2. Vincule Contas</h3>
+                        <p data-i18n-key="tutorial_step2_desc">Conecte suas contas do Instagram, TikTok, X, YouTube ou Facebook.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="card p-4 h-100">
+                        <i class="fas fa-upload feature-icon"></i>
+                        <h3 class="fs-5 fw-semibold" data-i18n-key="tutorial_step3_title">3. Agende Posts</h3>
+                        <p data-i18n-key="tutorial_step3_desc">Carregue conteúdo, adicione título, descrição e escolha o horário de publicação.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <a href="https://app.postboot.raseta.com.br/" class="btn btn-primary" data-i18n-key="tutorial_button">Experimente Grátis</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-3" data-i18n-key="pricing_title">Nossos Planos</h2>
+            <p class="text-center lead mb-5" data-i18n-key="pricing_subtitle">Escolha o plano ideal e economize com assinaturas de longo prazo!</p>
+
+            <!-- Toggle Switch -->
+            <div class="d-flex justify-content-center mb-5">
+                <div class="btn-group" role="group" aria-label="Escolha de período">
+                    <input type="radio" class="btn-check" name="pricing-period" id="monthly" autocomplete="off" checked>
+                    <label class="btn btn-outline-primary" for="monthly" data-i18n-key="pricing_monthly">Mensal</label>
+                    <input type="radio" class="btn-check" name="pricing-period" id="semiannual" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="semiannual" data-i18n-key="pricing_semiannual">Semestral <span class="badge bg-success ms-1">12% <span data-i18n-key="pricing_promo_off">OFF</span></span></label>
+                    <input type="radio" class="btn-check" name="pricing-period" id="annual" autocomplete="off">
+                    <label class="btn btn-outline-primary" for="annual" data-i18n-key="pricing_annual">Anual <span class="badge bg-success ms-1">25% <span data-i18n-key="pricing_promo_off">OFF</span></span></label>
+                </div>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="row g-4">
+                <!-- Plano Básico -->
+                <div class="col-md-4">
+                    <div class="card pricing-card h-100 position-relative">
+                        <h3 class="fs-4 fw-semibold" data-i18n-key="plan1_title">Básico</h3>
+                        <div class="price mt-3">
+                            <span class="fs-1 fw-bold monthly-price" data-i18n-key="plan1_price_monthly">R$ 19,90</span>
+                            <span class="fs-1 fw-bold semiannual-price d-none" data-i18n-key="plan1_price_semiannual">R$ 17,50</span>
+                            <span class="fs-1 fw-bold annual-price d-none" data-i18n-key="plan1_price_annual">R$ 14,92</span>
+                            <span class="fs-6 text-muted" data-i18n-key="plan_per_month">/mês</span>
+                            <p class="text-muted mt-2 billing-info">
+                                <span class="monthly-billing" data-i18n-key="plan1_billing_monthly">Faturado mensalmente</span>
+                                <span class="semiannual-billing d-none" data-i18n-key="plan1_billing_semiannual">Faturado a cada 6 meses (R$ 105,00)</span>
+                                <span class="annual-billing d-none" data-i18n-key="plan1_billing_annual">Faturado anualmente (R$ 179,00)</span>
+                            </p>
+                        </div>
+                        <ul>
+                            <li data-i18n-key="plan1_feature1">Agendamento para 1 conta por rede</li>
+                            <li data-i18n-key="plan1_feature2">10 posts por mês</li>
+                            <li data-i18n-key="plan1_feature3">Suporte via email</li>
+                        </ul>
+                        <a href="https://app.postboot.raseta.com.br/" class="btn btn-primary mt-auto" data-i18n-key="plan_button">Assinar Agora</a>
+                    </div>
+                </div>
+
+                <!-- Plano Profissional -->
+                <div class="col-md-4">
+                    <div class="card pricing-card h-100 position-relative">
+                        <span class="badge bg-primary position-absolute top-0 end-0 m-3" data-i18n-key="plan2_tag">Mais Popular</span>
+                        <h3 class="fs-4 fw-semibold" data-i18n-key="plan2_title">Profissional</h3>
+                        <div class="price mt-3">
+                            <span class="fs-1 fw-bold monthly-price" data-i18n-key="plan2_price_monthly">R$ 39,90</span>
+                            <span class="fs-1 fw-bold semiannual-price d-none" data-i18n-key="plan2_price_semiannual">R$ 35,00</span>
+                            <span class="fs-1 fw-bold annual-price d-none" data-i18n-key="plan2_price_annual">R$ 29,92</span>
+                            <span class="fs-6 text-muted" data-i18n-key="plan_per_month">/mês</span>
+                            <p class="text-muted mt-2 billing-info">
+                                <span class="monthly-billing" data-i18n-key="plan2_billing_monthly">Faturado mensalmente</span>
+                                <span class="semiannual-billing d-none" data-i18n-key="plan2_billing_semiannual">Faturado a cada 6 meses (R$ 210,00)</span>
+                                <span class="annual-billing d-none" data-i18n-key="plan2_billing_annual">Faturado anualmente (R$ 359,00)</span>
+                            </p>
+                        </div>
+                        <ul>
+                            <li data-i18n-key="plan2_feature1">Agendamento para 3 contas por rede</li>
+                            <li data-i18n-key="plan2_feature2">50 posts por mês</li>
+                            <li data-i18n-key="plan2_feature3">Suporte via chat e email</li>
+                            <li data-i18n-key="plan2_feature4">Relatórios básicos</li>
+                        </ul>
+                        <a href="https://app.postboot.raseta.com.br/" class="btn btn-primary mt-auto" data-i18n-key="plan_button">Assinar Agora</a>
+                    </div>
+                </div>
+
+                <!-- Plano Premium -->
+                <div class="col-md-4">
+                    <div class="card pricing-card h-100 position-relative">
+                        <h3 class="fs-4 fw-semibold" data-i18n-key="plan3_title">Premium</h3>
+                        <div class="price mt-3">
+                            <span class="fs-1 fw-bold monthly-price" data-i18n-key="plan3_price_monthly">R$ 69,90</span>
+                            <span class="fs-1 fw-bold semiannual-price d-none" data-i18n-key="plan3_price_semiannual">R$ 61,50</span>
+                            <span class="fs-1 fw-bold annual-price d-none" data-i18n-key="plan3_price_annual">R$ 52,42</span>
+                            <span class="fs-6 text-muted" data-i18n-key="plan_per_month">/mês</span>
+                            <p class="text-muted mt-2 billing-info">
+                                <span class="monthly-billing" data-i18n-key="plan3_billing_monthly">Faturado mensalmente</span>
+                                <span class="semiannual-billing d-none" data-i18n-key="plan3_billing_semiannual">Faturado a cada 6 meses (R$ 369,00)</span>
+                                <span class="annual-billing d-none" data-i18n-key="plan3_billing_annual">Faturado anualmente (R$ 629,00)</span>
+                            </p>
+                        </div>
+                        <ul>
+                            <li data-i18n-key="plan3_feature1">Agendamento para 5 contas por rede</li>
+                            <li data-i18n-key="plan3_feature2">Posts ilimitados</li>
+                            <li data-i18n-key="plan3_feature3">Suporte prioritário (chat, email e telefone)</li>
+                            <li data-i18n-key="plan3_feature4">Relatórios avançados</li>
+                        </ul>
+                        <a href="https://app.postboot.raseta.com.br/" class="btn btn-primary mt-auto" data-i18n-key="plan_button">Assinar Agora</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-i18n-key="why_us_title">Por Que Escolher o PostBoot?</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card p-4 h-100 text-center">
+                        <i class="fas fa-clock why-us-icon"></i>
+                        <h3 class="fs-4 fw-semibold" data-i18n-key="why_us_card1_title">Economize Horas Preciosas</h3>
+                        <p data-i18n-key="why_us_card1_desc">Imagine <span class="highlight-text">economizar até 10 horas por semana</span> só por não ter
+                            que postar manually em cada rede social. Com o PostBoot, você agenda tudo de uma vez e
+                            usa esse tempo para criar, vender ou até relaxar – o que realmente importa para você!</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card p-4 h-100 text-center">
+                        <i class="fas fa-rocket why-us-icon"></i>
+                        <h3 class="fs-4 fw-semibold" data-i18n-key="why_us_card2_title">Cresça Sem Estresse</h3>
+                        <p data-i18n-key="why_us_card2_desc">Postar consistentemente é o segredo do sucesso online, mas quem tem tempo pra isso? Com o
+                            PostBoot, você mantém suas redes ativas <span class="highlight-text">24/7</span>, sem
+                            esforço, enquanto foca em conquistar mais clientes ou curtir o resultado do seu trabalho.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-5">
+                <p class="lead mb-3" data-i18n-key="why_us_footer_text">Por menos de <span class="highlight-text">R$ 1 por dia</span>, você transforma caos
+                    em controle e tempo perdido em oportunidades. Por que continuar correndo atrás do relógio?</p>
+                <a href="#pricing" class="btn btn-primary btn-lg" data-i18n-key="why_us_footer_button">Quero Meu Tempo de Volta!</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="section bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5" data-i18n-key="contact_title">Contato</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="card p-4 text-center">
+                        <p class="mb-3"><i class="fas fa-envelope me-2"></i> <span data-i18n-key="contact_email">Email:</span> <a
+                                href="mailto:suporte@postboot.com">suporte@postboot.com</a></p>
+                        <p class="mb-3"><i class="fas fa-phone me-2"></i> <span data-i18n-key="contact_phone">Telefone:</span> (41) 98410-5986</p>
+                        <p><i class="fas fa-map-marker-alt me-2"></i> <span data-i18n-key="contact_location">Colombo, PR - Brasil</span></p>
+                        <div class="mt-3">
+                            <a href="#" class="text-primary me-3"><i class="fab fa-twitter fa-lg"></i></a>
+                            <a href="#" class="text-primary me-3"><i class="fab fa-instagram fa-lg"></i></a>
+                            <a href="#" class="text-primary"><i class="fab fa-linkedin fa-lg"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    
+
+    <!-- Creators Section -->
+    <section id="creators" class="creators-section">
+        <div class="container">
+            <h2 class="text-center mb-5" data-i18n-key="creators_title">Conheça os Criadores</h2>
+            <div class="row g-4 justify-content-center">
+                <!-- Ramon Pereira -->
+                <div class="col-md-4">
+                    <div class="card creator-card">
+                        <img src="Ramon.jfif" alt="Ramon Pereira" class="creator-avatar">
+                        <h3 class="creator-name" data-i18n-key="creator1_name">Ramon Pereira</h3>
+                        <p class="creator-title" data-i18n-key="creator1_title">Back-End Developer</p>
+                        <p data-i18n-key="creator1_desc">Especialista em Java, Spring Boot e Kafka com mais de 15 anos de experiência em TI. Focado em
+                            microserviços escaláveis e automação com IA.</p>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/in/ramon-pereira-2b8a8229/" target="_blank"><i
+                                    class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="https://github.com/RamonNP" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Kleber Martins -->
+                <div class="col-md-4">
+                    <div class="card creator-card">
+                        <img src="Kleber.jfif" alt="Kleber Martins" class="creator-avatar">
+                        <h3 class="creator-name" data-i18n-key="creator2_name">Kleber Martins</h3>
+                        <p class="creator-title" data-i18n-key="creator2_title">Java Developer</p>
+                        <p data-i18n-key="creator2_desc">Desenvolvedor com mais de 10 anos de experiência em Java, Spring Boot e PHP. Expertise em
+                            APIs, microsserviços e lógica de programação.</p>
+                        <div class="social-icons">
+                            <a href="https://www.linkedin.com/in/kleber-mart/" target="_blank"><i
+                                    class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                            <a href="https://github.com/seiscordas" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer text-center">
+        <div class="container">
+            <p class="mb-2" data-i18n-key="footer_copyright">© 2025 PostBoot. Todos os direitos reservados.</p>
+            <p><a href="index.html" class="text-primary" data-i18n-key="nav_back_to_home">Voltar ao Início</a></p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="fas fa-arrow-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/translate.js"></script>
+    <script>
+        // Função para alternar os preços e informações de faturamento
+        document.querySelectorAll('input[name="pricing-period"]').forEach((input) => {
+            input.addEventListener('change', function () {
+                const period = this.id; // monthly, semiannual ou annual
+
+                // Esconde todos os preços e informações de faturamento
+                document.querySelectorAll('.monthly-price, .semiannual-price, .annual-price').forEach(el => el.classList.add('d-none'));
+                document.querySelectorAll('.monthly-billing, .semiannual-billing, .annual-billing').forEach(el => el.classList.add('d-none'));
+
+                // Mostra apenas o preço e a informação de faturamento do período selecionado
+                document.querySelectorAll(`.${period}-price`).forEach(el => el.classList.remove('d-none'));
+                document.querySelectorAll(`.${period}-billing`).forEach(el => el.classList.remove('d-none'));
+            });
+        });
+    </script>
+</body>
+
+</html>
